@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}My Portfolio{% endblock %}
+
+{% block content %}
+<!-- Home Section -->
+<section id="home" class="py-5 hero-content">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1 class="display-4 fw-bold mb-4">Hi, I'm a Computer Science Student</h1>
+            <p class="lead mb-4">Passionate about creating elegant solutions through clean code and innovative design.</p>
+            <div class="d-grid gap-3 d-md-flex justify-content-md-start mb-4">
+                <a href="#projects" class="btn btn-primary btn-lg px-4 me-md-2 smooth-scroll">View My Work</a>
+                <a href="#contact" class="btn btn-outline-secondary btn-lg px-4 smooth-scroll">Get in Touch</a>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Profile Picture" class="img-fluid rounded-circle shadow-lg profile-image" style="max-width: 300px;">
+        </div>
+    </div>
+
+    <div class="row py-5">
+        <div class="col-md-12 text-center mb-5">
+            <h2 class="display-6 fw-bold">What I Do</h2>
+            <p class="lead text-muted">Delivering high-quality solutions across the full stack</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-code fa-3x mb-4 text-primary"></i>
+                    <h3 class="card-title h4 mb-3">Web Development</h3>
+                    <p class="card-text text-muted">Creating responsive and user-friendly web applications using modern technologies.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-mobile-alt fa-3x mb-4 text-primary"></i>
+                    <h3 class="card-title h4 mb-3">App Development</h3>
+                    <p class="card-text text-muted">Building cross-platform mobile applications with cutting-edge frameworks.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-database fa-3x mb-4 text-primary"></i>
+                    <h3 class="card-title h4 mb-3">Backend Development</h3>
+                    <p class="card-text text-muted">Developing robust and scalable server-side applications and APIs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="py-5">
+    <div class="text-center mb-5">
+        <h2 class="display-4 fw-bold">Featured Projects</h2>
+        <p class="lead text-muted">Some of my recent work</p>
+    </div>
+    <div class="row">
+        {% for project in projects %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ url_for('static', filename='img/' + project.image) }}" class="card-img-top" alt="{{ project.title }}">
+                <div class="card-body p-4">
+                    <h3 class="card-title h4 mb-3">{{ project.title }}</h3>
+                    <p class="card-text text-muted mb-4">{{ project.description }}</p>
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        {% for tech in project.technologies %}
+                        <span class="badge">{{ tech }}</span>
+                        {% endfor %}
+                   
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="py-5 bg-light">
+    <div class="text-center mb-5">
+        <h2 class="display-4 fw-bold">Skills & Expertise</h2>
+        <p class="lead text-muted">Technologies I work with</p>
+    </div>
+    <div class="row">
+        {% for category, skill_list in skills.items() %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="card-title h4 mb-4">{{ category }}</h3>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for skill in skill_list %}
+                        <span class="badge">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="h4 mb-4">Professional Experience</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4 class="h5 mb-2">Frontend Development</h4>
+                            <p class="text-muted mb-2">Company Name | 2020 - Present</p>
+                            <p class="mb-0">
+  Designed and developed responsive web interfaces using HTML, CSS, and JavaScript. Collaborated with the team to implement reusable components and enhance UI/UX. Gained hands-on experience in modern frameworks and followed best coding practices to build scalable applications.
+</p>
+                        </div>
+                        <div class="timeline-item mb-0">
+                            <h4 class="h5 mb-2">Cyber Security</h4>
+                            <p class="text-muted mb-2">Previous Company | 2018 - 2020</p>
+                            <p class="mb-0">
+  Worked on securing web applications by identifying vulnerabilities and applying security patches. Assisted in conducting penetration testing, threat modeling, and vulnerability assessments. Contributed to developing secure APIs and improving application resilience.
+</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold">Get in Touch</h2>
+                <p class="lead text-muted">Let's discuss your next project</p>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ url_for('index') }}">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-4">
+                            {{ form.name.label(class="form-label") }}
+                            {{ form.name(class="form-control") }}
+                        </div>
+                        <div class="mb-4">
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control") }}
+                        </div>
+                        <div class="mb-4">
+                            {{ form.subject.label(class="form-label") }}
+                            {{ form.subject(class="form-control") }}
+                        </div>
+                        <div class="mb-4">
+                            {{ form.message.label(class="form-label") }}
+                            {{ form.message(class="form-control", rows="5") }}
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg px-5">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>  
+</section>
+{% endblock %}
